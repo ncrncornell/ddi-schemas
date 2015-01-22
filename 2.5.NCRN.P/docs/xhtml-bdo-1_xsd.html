@@ -1,0 +1,1658 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <title>Schema documentation for xhtml-bdo-1.xsd</title>
+      <link rel="stylesheet" href="docHtml.css" type="text/css" /><script type="text/javascript">
+         <!--
+        var propertiesBoxes= new Array('properties_xhtml-bdo-1.xsd', 
+				'properties_bdo', 
+				'properties_bdo.type', 
+				'properties_dir.attrib_dir', 
+				'properties_bdo.attlist_dir', 
+				'properties_dir');
+var facetsBoxes= new Array('facets_dir.attrib_dir', 
+				'facets_bdo.attlist_dir', 
+				'facets_dir');
+var usedByBoxes= new Array('usedBy_bdo', 
+				'usedBy_bdo.type', 
+				'usedBy_dir.attrib_dir', 
+				'usedBy_bdo.attlist_dir', 
+				'usedBy_dir', 
+				'usedBy_bdo.content', 
+				'usedBy_dir.attrib', 
+				'usedBy_bdo.attlist');
+var sourceBoxes= new Array('source_bdo', 
+				'source_bdo.type', 
+				'source_dir.attrib_dir', 
+				'source_bdo.attlist_dir', 
+				'source_dir', 
+				'source_bdo.content', 
+				'source_dir.attrib', 
+				'source_bdo.attlist', 
+				'source_Global.bdo.attrib');
+var instanceBoxes= new Array('instance_bdo');
+var diagramBoxes= new Array('diagram_bdo', 
+				'diagram_bdo.type', 
+				'diagram_bdo.content', 
+				'diagram_dir.attrib', 
+				'diagram_bdo.attlist', 
+				'diagram_Global.bdo.attrib');
+var annotationBoxes= new Array('annotations_xhtml-bdo-1.xsd');
+var attributesBoxes= new Array('attributes_bdo', 
+				'attributes_bdo.type', 
+				'attributes_dir.attrib', 
+				'attributes_bdo.attlist', 
+				'attributes_Global.bdo.attrib');
+var modelBoxes= new Array('model_bdo', 
+				'model_bdo.type', 
+				'model_bdo.content');
+
+      
+        var button_prefix = 'button_';
+        
+        /**
+        * Returns an element in the current HTML document.
+        *
+        * @param elementID Identifier of HTML element
+        * @return               HTML element object
+        */
+        function getElementObject(elementID) {
+            var elemObj = null;
+            if (document.getElementById) {
+                elemObj = document.getElementById(elementID);
+            }
+            return elemObj;
+        }
+        
+        /**
+        * Switches the state of a collapseable box, e.g.
+        * if it's opened, it'll be closed, and vice versa.
+        *
+        * @param boxID Identifier of box
+        */
+        function switchState(boxID) {
+            var boxObj = getElementObject(boxID);
+            var buttonObj = getElementObject(button_prefix + boxID);
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else if (boxObj.style.display == "none") {
+                // Box is closed, so open it
+                openBox(boxObj, buttonObj);
+            } else if (boxObj.style.display == "block") {
+                // Box is opened, so close it
+                closeBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+        * Opens a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function openBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "block";
+                
+                // Change text of button
+                if (boxObj.style.display == "block") {
+                    buttonObj.src = "img/btM.gif";
+                }
+            }
+        }
+        
+        /**
+        * Closes a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function closeBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "none";
+                
+                // Change text of button
+                if (boxObj.style.display == "none") {
+                    buttonObj.src = "img/btP.gif";
+                }
+            }
+        }
+    
+       function switchStateForAll(buttonObj, boxList) {
+            if (buttonObj == null) {
+                // button not found
+            } else if (buttonObj.value == "+") {
+                // Expand all
+                expandAll(boxList);
+                buttonObj.value = "-";
+            } else if (buttonObj.value == "-") {
+                // Collapse all
+                collapseAll(boxList);
+                buttonObj.value = "+";
+            }
+        }
+        
+        /**
+        * Closes all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function collapseAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                closeBox(boxObj, buttonObj);
+            }
+        }
+            
+        /**
+        * Open all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function expandAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                openBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+         * Update the message presented in the title of the html page.
+         * - If the documentation was splited by namespace we present something like: "Documentation for namespace 'ns'"
+         * - If the documentation was splited by location we present somehing like: "Documentation for 'Schema.xsd'"
+         * - If no split we always present: "Documentation for 'MainSchema.xsd'"
+         */
+        function updatePageTitle(message) {
+            top.document.title = message;
+        }
+        
+          
+                    
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function findAndFloat(id, x_displacement, y_displacement){
+
+            var element = getElementObject(id);            
+            
+            window[id + "_obj"] = element;
+            
+            if(document.layers) {
+               element.style = element;
+            }
+            
+            element.current_y = y_displacement;      
+            element.first_time = true;
+         
+            element.floatElement = function(){
+               // It may be closed by an user action.
+                
+               // Target X and Y coordinates.
+               var x, y;
+               
+               var myWidth = 0, myHeight = 0;
+               if( typeof( window.innerWidth ) == 'number' ) {
+                  //Non-IE
+                  myWidth = window.innerWidth;
+                  myHeight = window.innerHeight;
+               } else if( document.documentElement && ( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) {
+                  //IE 6+ in 'standards compliant mode'
+                  myWidth = document.documentElement.clientWidth;
+                  myHeight = document.documentElement.clientHeight;
+               } else if( document.body && ( document.body.clientWidth || document.body.clientHeight ) ) {
+                  //IE 4 compatible
+                  myWidth = document.body.clientWidth;
+                  myHeight = document.body.clientHeight;
+               }
+               
+               
+               x = myWidth - x_displacement;
+               
+               var ns = (navigator.appName.indexOf("Netscape") != -1);               
+               y = ns ? pageYOffset : document.documentElement && document.documentElement.scrollTop ? 
+                  document.documentElement.scrollTop : document.body.scrollTop;               
+               y = y + y_displacement;               
+               
+               // The current y is the current coordinate of the floating element.
+               // This should be at the limit the y target coordinate.
+               this.current_y += (y - this.current_y)/1.25;
+               
+               // Add the pixels constant after the values
+               // and move the element.
+               var px = document.layers ? "" : "px";
+               this.style.left =  x + px;
+               this.style.top =  this.current_y + px;
+                              
+               setTimeout(this.id + "_obj.floatElement()", 100);
+            }
+            
+            element.floatElement();
+            return element;
+          }
+
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function selectTOCGroupBy(id, isChunked, indexFileLocation, indexFileNamespace, indexFileComponent){
+
+            if (!isChunked) {
+             var selectIds = new Array('toc_group_by_namespace', 'toc_group_by_location', 'toc_group_by_component_type');
+             // Make all the tabs invisible.
+               for (i = 0; i < 3; i++){
+                  var tab = getElementObject(selectIds[i]);
+                  tab.style.display = 'none';
+               }
+               var selTab = getElementObject(id);
+               selTab.style.display = 'block';
+            } else {
+             if (id == 'toc_group_by_namespace') {
+               parent.indexFrame.location = indexFileNamespace;
+             } else  if (id == 'toc_group_by_location') {
+               parent.indexFrame.location = indexFileLocation;
+             } else  if (id == 'toc_group_by_component_type') {
+              parent.indexFrame.location = indexFileComponent;
+             }
+            }
+         }
+          
+
+    
+                    //--></script></head>
+   <body>
+      <div id="global_controls" class="globalControls" style="position:absolute;right:0;">
+         <table class="rt">
+            <tr>
+               <td class="rt_cornerTopLeft"></td>
+               <td class="rt_lineTop"></td>
+               <td class="rt_cornerTopRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_lineLeft"></td>
+               <td class="rt_content">
+                  <h3>Showing:</h3>
+                  <table>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, annotationBoxes);" class="control" /></span><span class="globalControlName">Annotations</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, attributesBoxes);" class="control" /></span><span class="globalControlName">Attributes </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, diagramBoxes);" class="control" /></span><span class="globalControlName">Diagrams</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, facetsBoxes);" class="control" /></span><span class="globalControlName">Facets </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, instanceBoxes);" class="control" /></span><span class="globalControlName">Instances</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, modelBoxes);" class="control" /></span><span class="globalControlName">Model </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, propertiesBoxes);" class="control" /></span><span class="globalControlName">Properties </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, sourceBoxes);" class="control" /></span><span class="globalControlName">Source</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, usedByBoxes);" class="control" /></span><span class="globalControlName">Used by </span></td>
+                     </tr>
+                  </table>
+                  <div align="right"><span><input type="button" onclick="getElementObject('global_controls').style.display = 'none';" value="Close" /></span></div>
+               </td>
+               <td class="rt_lineRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_cornerBottomLeft"></td>
+               <td class="rt_lineBottom"></td>
+               <td class="rt_cornerBottomRight"></td>
+            </tr>
+         </table>
+      </div><a id="xhtml-bdo-1.xsd"></a><div class="componentTitle">Included schema <span class="qname">xhtml-bdo-1.xsd</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://www.w3.org/1999/xhtml</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_xhtml-bdo-1.xsd" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_xhtml-bdo-1.xsd');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_xhtml-bdo-1.xsd" style="display:block">
+                              <div class="annotation">
+                                 <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                    <tr>
+                                       <td width="100%"><pre><span class="tT">Bidirectional Override (bdo) Element</span><span class="tI">
+</span><span class="tT">          This is the XML Schema BDO Element module for XHTML</span><span class="tI">
+</span><span class="tT"></span><span class="tI">
+</span><span class="tT">          This modules declares the element 'bdo' and 'dir' attributes,</span><span class="tI">
+</span><span class="tT">          Used to override the  Unicode bidirectional algorithm for selected</span><span class="tI">
+</span><span class="tT">          fragments of text.</span><span class="tI">
+</span><span class="tT">          Bidirectional text support includes both the bdo element and</span><span class="tI">
+</span><span class="tT">          the 'dir' attribute.</span><span class="tI">
+</span><span class="tT"></span><span class="tI">
+</span><span class="tT">          $Id$</span></pre></td>
+                                    </tr>
+                                 </table>
+                              </div>
+                              <div class="annotation">
+                                 <p><a href="xhtml-copyright-1.xsd">xhtml-copyright-1.xsd</a></p>
+                              </div>
+                              <div class="annotation">
+                                 <p><a href="http://www.w3.org/TR/2001/REC-xhtml-modularization-20010410/abstract_modules.html#s_bdomodule">http://www.w3.org/TR/2001/REC-xhtml-modularization-20010410/abstract_modules.html#s_bdomodule</a></p>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_xhtml-bdo-1.xsd" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_xhtml-bdo-1.xsd');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_xhtml-bdo-1.xsd" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">attribute form default</td>
+                                    <td><b>unqualified</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">element form default</td>
+                                    <td><b>unqualified</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="bdo"></a><div class="componentTitle">Element <span class="qname">bdo</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://www.w3.org/1999/xhtml</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_bdo" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_bdo');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_bdo" style="display:block"><img alt="Diagram" border="0" src="img/xhtml-bdo-1_xsd_Element_bdo.jpeg" usemap="#xhtml-bdo-1_xsd_Element_bdo" /><map name="xhtml-bdo-1_xsd_Element_bdo" id="xhtml-bdo-1_xsd_Element_bdo">
+                                 <area alt="xhtml-bdo-1_xsd.tmp#bdo.attlist" href="xhtml-bdo-1_xsd.html#bdo.attlist" coords="110,82,211,108" />
+                                 <area alt="xhtml-inlstruct-1_xsd.tmp#br" href="xhtml-inlstruct-1_xsd.html#br" coords="453,306,504,331" />
+                                 <area alt="xhtml-inlstruct-1_xsd.tmp#span" href="xhtml-inlstruct-1_xsd.html#span" coords="453,341,508,366" />
+                                 <area alt="ddi-xhtml11-model-1_xsd.tmp#InlStruct.class" href="ddi-xhtml11-model-1_xsd.html#InlStruct.class" coords="371,265,494,291" />
+                                 <area alt="xhtml-inlphras-1_xsd.tmp#em" href="xhtml-inlphras-1_xsd.html#em" coords="453,427,504,452" />
+                                 <area alt="xhtml-inlphras-1_xsd.tmp#strong" href="xhtml-inlphras-1_xsd.html#strong" coords="453,462,515,487" />
+                                 <area alt="xhtml-inlphras-1_xsd.tmp#dfn" href="xhtml-inlphras-1_xsd.html#dfn" coords="453,497,504,522" />
+                                 <area alt="xhtml-inlphras-1_xsd.tmp#code" href="xhtml-inlphras-1_xsd.html#code" coords="453,532,508,557" />
+                                 <area alt="xhtml-inlphras-1_xsd.tmp#samp" href="xhtml-inlphras-1_xsd.html#samp" coords="453,567,510,592" />
+                                 <area alt="xhtml-inlphras-1_xsd.tmp#kbd" href="xhtml-inlphras-1_xsd.html#kbd" coords="453,602,504,627" />
+                                 <area alt="xhtml-inlphras-1_xsd.tmp#var" href="xhtml-inlphras-1_xsd.html#var" coords="453,637,504,662" />
+                                 <area alt="xhtml-inlphras-1_xsd.tmp#cite" href="xhtml-inlphras-1_xsd.html#cite" coords="453,672,504,697" />
+                                 <area alt="xhtml-inlphras-1_xsd.tmp#abbr" href="xhtml-inlphras-1_xsd.html#abbr" coords="453,707,506,732" />
+                                 <area alt="xhtml-inlphras-1_xsd.tmp#acronym" href="xhtml-inlphras-1_xsd.html#acronym" coords="453,742,526,767" />
+                                 <area alt="xhtml-inlphras-1_xsd.tmp#q" href="xhtml-inlphras-1_xsd.html#q" coords="453,777,504,802" />
+                                 <area alt="ddi-xhtml11-model-1_xsd.tmp#InlPhras.class" href="ddi-xhtml11-model-1_xsd.html#InlPhras.class" coords="371,386,493,412" />
+                                 <area alt="xhtml-inlpres-1_xsd.tmp#tt" href="xhtml-inlpres-1_xsd.html#tt" coords="453,863,504,888" />
+                                 <area alt="xhtml-inlpres-1_xsd.tmp#i" href="xhtml-inlpres-1_xsd.html#i" coords="453,898,504,923" />
+                                 <area alt="xhtml-inlpres-1_xsd.tmp#b" href="xhtml-inlpres-1_xsd.html#b" coords="453,933,504,958" />
+                                 <area alt="xhtml-inlpres-1_xsd.tmp#big" href="xhtml-inlpres-1_xsd.html#big" coords="453,968,504,993" />
+                                 <area alt="xhtml-inlpres-1_xsd.tmp#small" href="xhtml-inlpres-1_xsd.html#small" coords="453,1003,508,1028" />
+                                 <area alt="xhtml-inlpres-1_xsd.tmp#sub" href="xhtml-inlpres-1_xsd.html#sub" coords="453,1038,504,1063" />
+                                 <area alt="xhtml-inlpres-1_xsd.tmp#sup" href="xhtml-inlpres-1_xsd.html#sup" coords="453,1073,504,1098" />
+                                 <area alt="ddi-xhtml11-model-1_xsd.tmp#InlPres.class" href="ddi-xhtml11-model-1_xsd.html#InlPres.class" coords="371,822,487,848" />
+                                 <area alt="xhtml-bdo-1_xsd.tmp#bdo" href="xhtml-bdo-1_xsd.html#bdo" coords="453,1163,493,1188" />
+                                 <area alt="ddi-xhtml11-model-1_xsd.tmp#I18n.class" href="ddi-xhtml11-model-1_xsd.html#I18n.class" coords="371,1118,475,1144" />
+                                 <area alt="xhtml-hypertext-1_xsd.tmp#a" href="xhtml-hypertext-1_xsd.html#a" coords="453,1256,504,1281" />
+                                 <area alt="ddi-xhtml11-model-1_xsd.tmp#Anchor.class" href="ddi-xhtml11-model-1_xsd.html#Anchor.class" coords="371,1211,491,1237" />
+                                 <area alt="ddi-xhtml11-model-1_xsd.tmp#Inline.class" href="ddi-xhtml11-model-1_xsd.html#Inline.class" coords="286,221,394,247" />
+                                 <area alt="ddi-xhtml11-model-1_xsd.tmp#Inline.mix" href="ddi-xhtml11-model-1_xsd.html#Inline.mix" coords="201,177,299,203" />
+                                 <area alt="xhtml-bdo-1_xsd.tmp#bdo.content" href="xhtml-bdo-1_xsd.html#bdo.content" coords="96,133,208,159" />
+                                 <area alt="xhtml-bdo-1_xsd.tmp#bdo.type" href="xhtml-bdo-1_xsd.html#bdo.type" coords="82,3,175,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="xhtml-bdo-1_xsd.html#bdo.type" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-bdo-1.xsd')">bdo.type</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_bdo" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_bdo');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_bdo" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>complex</b></td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">mixed</td>
+                                    <td><b>true</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Used by</b></div>
+                           <div class="floatRight"><input id="button_usedBy_bdo" type="image" src="img/btM.gif" value="-" onclick="switchState('usedBy_bdo');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="usedBy_bdo" style="display:block">
+                              <table class="usedByTable">
+                                 <tr>
+                                    <td class="firstColumn">Element Group </td>
+                                    <td><b><a href="ddi-xhtml11-model-1_xsd.html#I18n.class" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for ddi-xhtml11-model-1.xsd')">I18n.class</a></b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_bdo" type="image" src="img/btM.gif" value="-" onclick="switchState('model_bdo');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_bdo" style="display:block">(<b><a href="xhtml-inlstruct-1_xsd.html#br" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlstruct-1.xsd')">br</a></b> | <b><a href="xhtml-inlstruct-1_xsd.html#span" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlstruct-1.xsd')">span</a></b> | <b><a href="xhtml-inlphras-1_xsd.html#em" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlphras-1.xsd')">em</a></b> | <b><a href="xhtml-inlphras-1_xsd.html#strong" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlphras-1.xsd')">strong</a></b> | <b><a href="xhtml-inlphras-1_xsd.html#dfn" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlphras-1.xsd')">dfn</a></b> | <b><a href="xhtml-inlphras-1_xsd.html#code" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlphras-1.xsd')">code</a></b> | <b><a href="xhtml-inlphras-1_xsd.html#samp" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlphras-1.xsd')">samp</a></b> | <b><a href="xhtml-inlphras-1_xsd.html#kbd" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlphras-1.xsd')">kbd</a></b> | <b><a href="xhtml-inlphras-1_xsd.html#var" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlphras-1.xsd')">var</a></b> | <b><a href="xhtml-inlphras-1_xsd.html#cite" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlphras-1.xsd')">cite</a></b> | <b><a href="xhtml-inlphras-1_xsd.html#abbr" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlphras-1.xsd')">abbr</a></b> | <b><a href="xhtml-inlphras-1_xsd.html#acronym" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlphras-1.xsd')">acronym</a></b> | <b><a href="xhtml-inlphras-1_xsd.html#q" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlphras-1.xsd')">q</a></b> | <b><a href="xhtml-inlpres-1_xsd.html#tt" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlpres-1.xsd')">tt</a></b> | <b><a href="xhtml-inlpres-1_xsd.html#i" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlpres-1.xsd')">i</a></b> | <b><a href="xhtml-inlpres-1_xsd.html#b" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlpres-1.xsd')">b</a></b> | <b><a href="xhtml-inlpres-1_xsd.html#big" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlpres-1.xsd')">big</a></b> | <b><a href="xhtml-inlpres-1_xsd.html#small" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlpres-1.xsd')">small</a></b> | <b><a href="xhtml-inlpres-1_xsd.html#sub" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlpres-1.xsd')">sub</a></b> | <b><a href="xhtml-inlpres-1_xsd.html#sup" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlpres-1.xsd')">sup</a></b> | (<b><a href="xhtml-bdo-1_xsd.html#bdo" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-bdo-1.xsd')">bdo</a></b>) | (<b><a href="xhtml-hypertext-1_xsd.html#a" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-hypertext-1.xsd')">a</a></b>))
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="xhtml-hypertext-1_xsd.html#a" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-hypertext-1.xsd')">a</a></b>, <b><a href="xhtml-inlphras-1_xsd.html#abbr" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlphras-1.xsd')">abbr</a></b>, <b><a href="xhtml-inlphras-1_xsd.html#acronym" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlphras-1.xsd')">acronym</a></b>, <b><a href="xhtml-inlpres-1_xsd.html#b" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlpres-1.xsd')">b</a></b>, <b><a href="xhtml-bdo-1_xsd.html#bdo" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-bdo-1.xsd')">bdo</a></b>, <b><a href="xhtml-inlpres-1_xsd.html#big" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlpres-1.xsd')">big</a></b>, <b><a href="xhtml-inlstruct-1_xsd.html#br" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlstruct-1.xsd')">br</a></b>, <b><a href="xhtml-inlphras-1_xsd.html#cite" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlphras-1.xsd')">cite</a></b>, <b><a href="xhtml-inlphras-1_xsd.html#code" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlphras-1.xsd')">code</a></b>, <b><a href="xhtml-inlphras-1_xsd.html#dfn" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlphras-1.xsd')">dfn</a></b>, <b><a href="xhtml-inlphras-1_xsd.html#em" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlphras-1.xsd')">em</a></b>, <b><a href="xhtml-inlpres-1_xsd.html#i" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlpres-1.xsd')">i</a></b>, <b><a href="xhtml-inlphras-1_xsd.html#kbd" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlphras-1.xsd')">kbd</a></b>, <b><a href="xhtml-inlphras-1_xsd.html#q" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlphras-1.xsd')">q</a></b>, <b><a href="xhtml-inlphras-1_xsd.html#samp" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlphras-1.xsd')">samp</a></b>, <b><a href="xhtml-inlpres-1_xsd.html#small" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlpres-1.xsd')">small</a></b>, <b><a href="xhtml-inlstruct-1_xsd.html#span" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlstruct-1.xsd')">span</a></b>, <b><a href="xhtml-inlphras-1_xsd.html#strong" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlphras-1.xsd')">strong</a></b>, <b><a href="xhtml-inlpres-1_xsd.html#sub" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlpres-1.xsd')">sub</a></b>, <b><a href="xhtml-inlpres-1_xsd.html#sup" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlpres-1.xsd')">sup</a></b>, <b><a href="xhtml-inlpres-1_xsd.html#tt" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlpres-1.xsd')">tt</a></b>, <b><a href="xhtml-inlphras-1_xsd.html#var" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlphras-1.xsd')">var</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Instance</b></div>
+                           <div class="floatRight"><input id="button_instance_bdo" type="image" src="img/btM.gif" value="-" onclick="switchState('instance_bdo');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="instance_bdo" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;bdo</span><span class="tT"> </span><span class="tAN">class=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">dir=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">id=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xml:lang=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">title=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xmlns=</span><span class="tAV">"http://www.w3.org/1999/xhtml"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;br</span><span class="tT"> </span><span class="tAN">class=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">id=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">title=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/br&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;span</span><span class="tT"> </span><span class="tAN">class=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">dir=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">id=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xml:lang=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">style=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">title=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/span&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;em</span><span class="tT"> </span><span class="tAN">class=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">dir=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">id=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xml:lang=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">style=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">title=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/em&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;strong</span><span class="tT"> </span><span class="tAN">class=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">dir=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">id=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xml:lang=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">style=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">title=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/strong&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;dfn</span><span class="tT"> </span><span class="tAN">class=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">dir=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">id=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xml:lang=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">style=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">title=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/dfn&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;code</span><span class="tT"> </span><span class="tAN">class=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">dir=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">id=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xml:lang=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">style=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">title=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/code&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;samp</span><span class="tT"> </span><span class="tAN">class=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">dir=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">id=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xml:lang=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">style=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">title=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/samp&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;kbd</span><span class="tT"> </span><span class="tAN">class=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">dir=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">id=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xml:lang=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">style=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">title=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/kbd&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;var</span><span class="tT"> </span><span class="tAN">class=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">dir=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">id=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xml:lang=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">style=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">title=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/var&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;cite</span><span class="tT"> </span><span class="tAN">class=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">dir=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">id=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xml:lang=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">style=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">title=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/cite&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;abbr</span><span class="tT"> </span><span class="tAN">class=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">dir=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">id=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xml:lang=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">style=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">title=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/abbr&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;acronym</span><span class="tT"> </span><span class="tAN">class=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">dir=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">id=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xml:lang=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">style=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">title=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/acronym&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;q</span><span class="tT"> </span><span class="tAN">cite=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">class=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">dir=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">id=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xml:lang=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">style=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">title=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/q&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;tt</span><span class="tT"> </span><span class="tAN">class=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">dir=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">id=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xml:lang=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">style=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">title=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/tt&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;i</span><span class="tT"> </span><span class="tAN">class=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">dir=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">id=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xml:lang=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">style=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">title=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/i&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;b</span><span class="tT"> </span><span class="tAN">class=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">dir=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">id=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xml:lang=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">style=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">title=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/b&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;big</span><span class="tT"> </span><span class="tAN">class=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">dir=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">id=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xml:lang=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">style=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">title=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/big&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;small</span><span class="tT"> </span><span class="tAN">class=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">dir=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">id=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xml:lang=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">style=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">title=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/small&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;sub</span><span class="tT"> </span><span class="tAN">class=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">dir=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">id=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xml:lang=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">style=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">title=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/sub&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;sup</span><span class="tT"> </span><span class="tAN">class=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">dir=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">id=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xml:lang=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">style=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">title=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/sup&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;bdo</span><span class="tT"> </span><span class="tAN">class=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">dir=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">id=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xml:lang=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">title=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/bdo&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;a</span><span class="tT"> </span><span class="tAN">accesskey=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">charset=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">class=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">dir=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">href=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">hreflang=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">id=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">xml:lang=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">rel=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">rev=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">style=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">tabindex=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">title=</span><span class="tAV">""</span><span class="tT"> </span><span class="tAN">type=</span><span class="tAV">""</span><span class="tEl">&gt;</span><span class="tT" style="white-space:normal">{1,1}</span><span class="tEl">&lt;/a&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/bdo&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_bdo" type="image" src="img/btM.gif" value="-" onclick="switchState('attributes_bdo');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_bdo" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th width="10%">Type</th>
+                                       <th width="5%">Use</th>
+                                       <th>Annotation</th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="xhtml-attribs-1_xsd.html#class_class" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for xhtml-attribs-1.xsd')">class</a></b></td>
+                                    <td><b>xs:NMTOKENS</b></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="xhtml-bdo-1_xsd.html#bdo.attlist_dir" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for xhtml-bdo-1.xsd')">dir</a></b></td>
+                                    <td>restriction of <b>xs:NMTOKEN</b></td>
+                                    <td>required</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="xhtml-attribs-1_xsd.html#id_id" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for xhtml-attribs-1.xsd')">id</a></b></td>
+                                    <td><b>xs:ID</b></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="xhtml-attribs-1_xsd.html#title_title" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for xhtml-attribs-1.xsd')">title</a></b></td>
+                                    <td><b>xs:string</b></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="xml_xsd.html#lang" target="mainFrame" title="http://www.w3.org/XML/1998/namespace" onclick="updatePageTitle('Schema documentation for xml.xsd')">xml:lang</a></b></td>
+                                    <td><b>xs:language</b></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td width="100%"><pre><span class="tT">In due course, we should install the relevant ISO 2- and 3-letter</span><span class="tI">
+</span><span class="tT">codes as the enumerated possible values . . .</span></pre></td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_bdo" type="image" src="img/btM.gif" value="-" onclick="switchState('source_bdo');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_bdo" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;xs:element</span><span class="tAN"> name=</span><span class="tAV">"bdo"</span><span class="tAN"> type=</span><span class="tAV">"bdo.type"</span><span class="tEl">/&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="bdo.type"></a><div class="componentTitle">Complex Type <span class="qname">bdo.type</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://www.w3.org/1999/xhtml</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_bdo.type" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_bdo.type');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_bdo.type" style="display:block"><img alt="Diagram" border="0" src="img/xhtml-bdo-1_xsd_Complex_Type_bdo_type.jpeg" usemap="#xhtml-bdo-1_xsd_Complex_Type_bdo_type" /><map name="xhtml-bdo-1_xsd_Complex_Type_bdo_type" id="xhtml-bdo-1_xsd_Complex_Type_bdo_type">
+                                 <area alt="xhtml-bdo-1_xsd.tmp#bdo.attlist" href="xhtml-bdo-1_xsd.html#bdo.attlist" coords="142,42,243,68" />
+                                 <area alt="xhtml-inlstruct-1_xsd.tmp#br" href="xhtml-inlstruct-1_xsd.html#br" coords="485,266,536,291" />
+                                 <area alt="xhtml-inlstruct-1_xsd.tmp#span" href="xhtml-inlstruct-1_xsd.html#span" coords="485,301,540,326" />
+                                 <area alt="ddi-xhtml11-model-1_xsd.tmp#InlStruct.class" href="ddi-xhtml11-model-1_xsd.html#InlStruct.class" coords="403,225,526,251" />
+                                 <area alt="xhtml-inlphras-1_xsd.tmp#em" href="xhtml-inlphras-1_xsd.html#em" coords="485,387,536,412" />
+                                 <area alt="xhtml-inlphras-1_xsd.tmp#strong" href="xhtml-inlphras-1_xsd.html#strong" coords="485,422,547,447" />
+                                 <area alt="xhtml-inlphras-1_xsd.tmp#dfn" href="xhtml-inlphras-1_xsd.html#dfn" coords="485,457,536,482" />
+                                 <area alt="xhtml-inlphras-1_xsd.tmp#code" href="xhtml-inlphras-1_xsd.html#code" coords="485,492,540,517" />
+                                 <area alt="xhtml-inlphras-1_xsd.tmp#samp" href="xhtml-inlphras-1_xsd.html#samp" coords="485,527,542,552" />
+                                 <area alt="xhtml-inlphras-1_xsd.tmp#kbd" href="xhtml-inlphras-1_xsd.html#kbd" coords="485,562,536,587" />
+                                 <area alt="xhtml-inlphras-1_xsd.tmp#var" href="xhtml-inlphras-1_xsd.html#var" coords="485,597,536,622" />
+                                 <area alt="xhtml-inlphras-1_xsd.tmp#cite" href="xhtml-inlphras-1_xsd.html#cite" coords="485,632,536,657" />
+                                 <area alt="xhtml-inlphras-1_xsd.tmp#abbr" href="xhtml-inlphras-1_xsd.html#abbr" coords="485,667,538,692" />
+                                 <area alt="xhtml-inlphras-1_xsd.tmp#acronym" href="xhtml-inlphras-1_xsd.html#acronym" coords="485,702,558,727" />
+                                 <area alt="xhtml-inlphras-1_xsd.tmp#q" href="xhtml-inlphras-1_xsd.html#q" coords="485,737,536,762" />
+                                 <area alt="ddi-xhtml11-model-1_xsd.tmp#InlPhras.class" href="ddi-xhtml11-model-1_xsd.html#InlPhras.class" coords="403,346,525,372" />
+                                 <area alt="xhtml-inlpres-1_xsd.tmp#tt" href="xhtml-inlpres-1_xsd.html#tt" coords="485,823,536,848" />
+                                 <area alt="xhtml-inlpres-1_xsd.tmp#i" href="xhtml-inlpres-1_xsd.html#i" coords="485,858,536,883" />
+                                 <area alt="xhtml-inlpres-1_xsd.tmp#b" href="xhtml-inlpres-1_xsd.html#b" coords="485,893,536,918" />
+                                 <area alt="xhtml-inlpres-1_xsd.tmp#big" href="xhtml-inlpres-1_xsd.html#big" coords="485,928,536,953" />
+                                 <area alt="xhtml-inlpres-1_xsd.tmp#small" href="xhtml-inlpres-1_xsd.html#small" coords="485,963,540,988" />
+                                 <area alt="xhtml-inlpres-1_xsd.tmp#sub" href="xhtml-inlpres-1_xsd.html#sub" coords="485,998,536,1023" />
+                                 <area alt="xhtml-inlpres-1_xsd.tmp#sup" href="xhtml-inlpres-1_xsd.html#sup" coords="485,1033,536,1058" />
+                                 <area alt="ddi-xhtml11-model-1_xsd.tmp#InlPres.class" href="ddi-xhtml11-model-1_xsd.html#InlPres.class" coords="403,782,519,808" />
+                                 <area alt="xhtml-bdo-1_xsd.tmp#bdo" href="xhtml-bdo-1_xsd.html#bdo" coords="485,1123,536,1148" />
+                                 <area alt="ddi-xhtml11-model-1_xsd.tmp#I18n.class" href="ddi-xhtml11-model-1_xsd.html#I18n.class" coords="403,1078,507,1104" />
+                                 <area alt="xhtml-hypertext-1_xsd.tmp#a" href="xhtml-hypertext-1_xsd.html#a" coords="485,1216,536,1241" />
+                                 <area alt="ddi-xhtml11-model-1_xsd.tmp#Anchor.class" href="ddi-xhtml11-model-1_xsd.html#Anchor.class" coords="403,1171,523,1197" />
+                                 <area alt="ddi-xhtml11-model-1_xsd.tmp#Inline.class" href="ddi-xhtml11-model-1_xsd.html#Inline.class" coords="318,181,426,207" />
+                                 <area alt="ddi-xhtml11-model-1_xsd.tmp#Inline.mix" href="ddi-xhtml11-model-1_xsd.html#Inline.mix" coords="233,137,331,163" />
+                                 <area alt="xhtml-bdo-1_xsd.tmp#bdo.content" href="xhtml-bdo-1_xsd.html#bdo.content" coords="128,93,240,119" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_bdo.type" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_bdo.type');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_bdo.type" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">mixed</td>
+                                    <td><b>true</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Used by</b></div>
+                           <div class="floatRight"><input id="button_usedBy_bdo.type" type="image" src="img/btM.gif" value="-" onclick="switchState('usedBy_bdo.type');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="usedBy_bdo.type" style="display:block">
+                              <table class="usedByTable">
+                                 <tr>
+                                    <td class="firstColumn">Element </td>
+                                    <td><b><a href="xhtml-bdo-1_xsd.html#bdo" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-bdo-1.xsd')">bdo</a></b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_bdo.type" type="image" src="img/btM.gif" value="-" onclick="switchState('model_bdo.type');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_bdo.type" style="display:block">(<b><a href="xhtml-inlstruct-1_xsd.html#br" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlstruct-1.xsd')">br</a></b> | <b><a href="xhtml-inlstruct-1_xsd.html#span" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlstruct-1.xsd')">span</a></b> | <b><a href="xhtml-inlphras-1_xsd.html#em" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlphras-1.xsd')">em</a></b> | <b><a href="xhtml-inlphras-1_xsd.html#strong" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlphras-1.xsd')">strong</a></b> | <b><a href="xhtml-inlphras-1_xsd.html#dfn" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlphras-1.xsd')">dfn</a></b> | <b><a href="xhtml-inlphras-1_xsd.html#code" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlphras-1.xsd')">code</a></b> | <b><a href="xhtml-inlphras-1_xsd.html#samp" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlphras-1.xsd')">samp</a></b> | <b><a href="xhtml-inlphras-1_xsd.html#kbd" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlphras-1.xsd')">kbd</a></b> | <b><a href="xhtml-inlphras-1_xsd.html#var" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlphras-1.xsd')">var</a></b> | <b><a href="xhtml-inlphras-1_xsd.html#cite" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlphras-1.xsd')">cite</a></b> | <b><a href="xhtml-inlphras-1_xsd.html#abbr" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlphras-1.xsd')">abbr</a></b> | <b><a href="xhtml-inlphras-1_xsd.html#acronym" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlphras-1.xsd')">acronym</a></b> | <b><a href="xhtml-inlphras-1_xsd.html#q" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlphras-1.xsd')">q</a></b> | <b><a href="xhtml-inlpres-1_xsd.html#tt" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlpres-1.xsd')">tt</a></b> | <b><a href="xhtml-inlpres-1_xsd.html#i" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlpres-1.xsd')">i</a></b> | <b><a href="xhtml-inlpres-1_xsd.html#b" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlpres-1.xsd')">b</a></b> | <b><a href="xhtml-inlpres-1_xsd.html#big" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlpres-1.xsd')">big</a></b> | <b><a href="xhtml-inlpres-1_xsd.html#small" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlpres-1.xsd')">small</a></b> | <b><a href="xhtml-inlpres-1_xsd.html#sub" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlpres-1.xsd')">sub</a></b> | <b><a href="xhtml-inlpres-1_xsd.html#sup" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlpres-1.xsd')">sup</a></b> | (<b><a href="xhtml-bdo-1_xsd.html#bdo" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-bdo-1.xsd')">bdo</a></b>) | (<b><a href="xhtml-hypertext-1_xsd.html#a" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-hypertext-1.xsd')">a</a></b>))
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="xhtml-hypertext-1_xsd.html#a" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-hypertext-1.xsd')">a</a></b>, <b><a href="xhtml-inlphras-1_xsd.html#abbr" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlphras-1.xsd')">abbr</a></b>, <b><a href="xhtml-inlphras-1_xsd.html#acronym" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlphras-1.xsd')">acronym</a></b>, <b><a href="xhtml-inlpres-1_xsd.html#b" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlpres-1.xsd')">b</a></b>, <b><a href="xhtml-bdo-1_xsd.html#bdo" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-bdo-1.xsd')">bdo</a></b>, <b><a href="xhtml-inlpres-1_xsd.html#big" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlpres-1.xsd')">big</a></b>, <b><a href="xhtml-inlstruct-1_xsd.html#br" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlstruct-1.xsd')">br</a></b>, <b><a href="xhtml-inlphras-1_xsd.html#cite" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlphras-1.xsd')">cite</a></b>, <b><a href="xhtml-inlphras-1_xsd.html#code" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlphras-1.xsd')">code</a></b>, <b><a href="xhtml-inlphras-1_xsd.html#dfn" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlphras-1.xsd')">dfn</a></b>, <b><a href="xhtml-inlphras-1_xsd.html#em" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlphras-1.xsd')">em</a></b>, <b><a href="xhtml-inlpres-1_xsd.html#i" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlpres-1.xsd')">i</a></b>, <b><a href="xhtml-inlphras-1_xsd.html#kbd" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlphras-1.xsd')">kbd</a></b>, <b><a href="xhtml-inlphras-1_xsd.html#q" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlphras-1.xsd')">q</a></b>, <b><a href="xhtml-inlphras-1_xsd.html#samp" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlphras-1.xsd')">samp</a></b>, <b><a href="xhtml-inlpres-1_xsd.html#small" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlpres-1.xsd')">small</a></b>, <b><a href="xhtml-inlstruct-1_xsd.html#span" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlstruct-1.xsd')">span</a></b>, <b><a href="xhtml-inlphras-1_xsd.html#strong" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlphras-1.xsd')">strong</a></b>, <b><a href="xhtml-inlpres-1_xsd.html#sub" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlpres-1.xsd')">sub</a></b>, <b><a href="xhtml-inlpres-1_xsd.html#sup" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlpres-1.xsd')">sup</a></b>, <b><a href="xhtml-inlpres-1_xsd.html#tt" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlpres-1.xsd')">tt</a></b>, <b><a href="xhtml-inlphras-1_xsd.html#var" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlphras-1.xsd')">var</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_bdo.type" type="image" src="img/btM.gif" value="-" onclick="switchState('attributes_bdo.type');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_bdo.type" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th width="10%">Type</th>
+                                       <th width="5%">Use</th>
+                                       <th>Annotation</th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="xhtml-attribs-1_xsd.html#class_class" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for xhtml-attribs-1.xsd')">class</a></b></td>
+                                    <td><b>xs:NMTOKENS</b></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="xhtml-bdo-1_xsd.html#bdo.attlist_dir" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for xhtml-bdo-1.xsd')">dir</a></b></td>
+                                    <td>restriction of <b>xs:NMTOKEN</b></td>
+                                    <td>required</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="xhtml-attribs-1_xsd.html#id_id" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for xhtml-attribs-1.xsd')">id</a></b></td>
+                                    <td><b>xs:ID</b></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="xhtml-attribs-1_xsd.html#title_title" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for xhtml-attribs-1.xsd')">title</a></b></td>
+                                    <td><b>xs:string</b></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="xml_xsd.html#lang" target="mainFrame" title="http://www.w3.org/XML/1998/namespace" onclick="updatePageTitle('Schema documentation for xml.xsd')">xml:lang</a></b></td>
+                                    <td><b>xs:language</b></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td width="100%"><pre><span class="tT">In due course, we should install the relevant ISO 2- and 3-letter</span><span class="tI">
+</span><span class="tT">codes as the enumerated possible values . . .</span></pre></td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_bdo.type" type="image" src="img/btM.gif" value="-" onclick="switchState('source_bdo.type');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_bdo.type" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;xs:complexType</span><span class="tAN"> name=</span><span class="tAV">"bdo.type"</span><span class="tAN"> mixed=</span><span class="tAV">"true"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xs:group</span><span class="tAN"> ref=</span><span class="tAV">"bdo.content"</span><span class="tEl">/&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xs:attributeGroup</span><span class="tAN"> ref=</span><span class="tAV">"bdo.attlist"</span><span class="tEl">/&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xs:complexType&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="dir.attrib_dir"></a><div class="componentTitle">Attribute <span class="qname"><b><a href="xhtml-bdo-1_xsd.html#dir.attrib" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-bdo-1.xsd')">dir.attrib</a></b> / @dir</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>No namespace</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td>restriction of <b>xs:NMTOKEN</b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_dir.attrib_dir" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_dir.attrib_dir');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_dir.attrib_dir" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>simple</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Facets</b></div>
+                           <div class="floatRight"><input id="button_facets_dir.attrib_dir" type="image" src="img/btM.gif" value="-" onclick="switchState('facets_dir.attrib_dir');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="facets_dir.attrib_dir" style="display:block">
+                              <table class="facetsTable">
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>ltr</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>rtl</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Used by</b></div>
+                           <div class="floatRight"><input id="button_usedBy_dir.attrib_dir" type="image" src="img/btM.gif" value="-" onclick="switchState('usedBy_dir.attrib_dir');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="usedBy_dir.attrib_dir" style="display:block">
+                              <table class="usedByTable">
+                                 <tr>
+                                    <td class="firstColumn">Attribute Group </td>
+                                    <td><b><a href="xhtml-bdo-1_xsd.html#dir.attrib" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-bdo-1.xsd')">dir.attrib</a></b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_dir.attrib_dir" type="image" src="img/btM.gif" value="-" onclick="switchState('source_dir.attrib_dir');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_dir.attrib_dir" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;xs:attribute</span><span class="tAN"> name=</span><span class="tAV">"dir"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xs:simpleType</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xs:restriction</span><span class="tAN"> base=</span><span class="tAV">"xs:NMTOKEN"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;xs:enumeration</span><span class="tAN"> value=</span><span class="tAV">"ltr"</span><span class="tEl">/&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;xs:enumeration</span><span class="tAN"> value=</span><span class="tAV">"rtl"</span><span class="tEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/xs:restriction&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xs:simpleType&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xs:attribute&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="bdo.attlist_dir"></a><div class="componentTitle">Attribute <span class="qname"><b><a href="xhtml-bdo-1_xsd.html#bdo.attlist" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-bdo-1.xsd')">bdo.attlist</a></b> / @dir</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>No namespace</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td>restriction of <b>xs:NMTOKEN</b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_bdo.attlist_dir" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_bdo.attlist_dir');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_bdo.attlist_dir" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">use</td>
+                                    <td><b>required</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Facets</b></div>
+                           <div class="floatRight"><input id="button_facets_bdo.attlist_dir" type="image" src="img/btM.gif" value="-" onclick="switchState('facets_bdo.attlist_dir');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="facets_bdo.attlist_dir" style="display:block">
+                              <table class="facetsTable">
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>ltr</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>rtl</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Used by</b></div>
+                           <div class="floatRight"><input id="button_usedBy_bdo.attlist_dir" type="image" src="img/btM.gif" value="-" onclick="switchState('usedBy_bdo.attlist_dir');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="usedBy_bdo.attlist_dir" style="display:block">
+                              <table class="usedByTable">
+                                 <tr>
+                                    <td class="firstColumn">Attribute Group </td>
+                                    <td><b><a href="xhtml-bdo-1_xsd.html#bdo.attlist" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-bdo-1.xsd')">bdo.attlist</a></b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_bdo.attlist_dir" type="image" src="img/btM.gif" value="-" onclick="switchState('source_bdo.attlist_dir');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_bdo.attlist_dir" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;xs:attribute</span><span class="tAN"> name=</span><span class="tAV">"dir"</span><span class="tAN"> use=</span><span class="tAV">"required"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xs:simpleType</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xs:restriction</span><span class="tAN"> base=</span><span class="tAV">"xs:NMTOKEN"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;xs:enumeration</span><span class="tAN"> value=</span><span class="tAV">"ltr"</span><span class="tEl">/&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;xs:enumeration</span><span class="tAN"> value=</span><span class="tAV">"rtl"</span><span class="tEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/xs:restriction&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xs:simpleType&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xs:attribute&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="dir"></a><div class="componentTitle">Attribute <span class="qname">@dir</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://www.w3.org/1999/xhtml</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td>restriction of <b>xs:NMTOKEN</b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Properties</b></div>
+                           <div class="floatRight"><input id="button_properties_dir" type="image" src="img/btM.gif" value="-" onclick="switchState('properties_dir');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="properties_dir" style="display:block">
+                              <table class="propertiesTable">
+                                 <tr>
+                                    <td class="firstColumn" style="white-space: nowrap;">content</td>
+                                    <td><b>simple</b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Facets</b></div>
+                           <div class="floatRight"><input id="button_facets_dir" type="image" src="img/btM.gif" value="-" onclick="switchState('facets_dir');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="facets_dir" style="display:block">
+                              <table class="facetsTable">
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>ltr</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>rtl</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Used by</b></div>
+                           <div class="floatRight"><input id="button_usedBy_dir" type="image" src="img/btM.gif" value="-" onclick="switchState('usedBy_dir');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="usedBy_dir" style="display:block">
+                              <table class="usedByTable">
+                                 <tr>
+                                    <td class="firstColumn">Attribute Group </td>
+                                    <td><b><a href="xhtml-bdo-1_xsd.html#Global.bdo.attrib" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-bdo-1.xsd')">Global.bdo.attrib</a></b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_dir" type="image" src="img/btM.gif" value="-" onclick="switchState('source_dir');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_dir" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;xs:attribute</span><span class="tAN"> name=</span><span class="tAV">"dir"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xs:simpleType</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xs:restriction</span><span class="tAN"> base=</span><span class="tAV">"xs:NMTOKEN"</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;xs:enumeration</span><span class="tAN"> value=</span><span class="tAV">"ltr"</span><span class="tEl">/&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;xs:enumeration</span><span class="tAN"> value=</span><span class="tAV">"rtl"</span><span class="tEl">/&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/xs:restriction&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xs:simpleType&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xs:attribute&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="bdo.content"></a><div class="componentTitle">Element Group <span class="qname">bdo.content</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://www.w3.org/1999/xhtml</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_bdo.content" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_bdo.content');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_bdo.content" style="display:block"><img alt="Diagram" border="0" src="img/xhtml-bdo-1_xsd_Element_Group_bdo_content.jpeg" usemap="#xhtml-bdo-1_xsd_Element_Group_bdo_content" /><map name="xhtml-bdo-1_xsd_Element_Group_bdo_content" id="xhtml-bdo-1_xsd_Element_Group_bdo_content">
+                                 <area alt="xhtml-inlstruct-1_xsd.tmp#br" href="xhtml-inlstruct-1_xsd.html#br" coords="486,132,537,157" />
+                                 <area alt="xhtml-inlstruct-1_xsd.tmp#span" href="xhtml-inlstruct-1_xsd.html#span" coords="486,167,541,192" />
+                                 <area alt="ddi-xhtml11-model-1_xsd.tmp#InlStruct.class" href="ddi-xhtml11-model-1_xsd.html#InlStruct.class" coords="404,91,527,117" />
+                                 <area alt="xhtml-inlphras-1_xsd.tmp#em" href="xhtml-inlphras-1_xsd.html#em" coords="486,253,537,278" />
+                                 <area alt="xhtml-inlphras-1_xsd.tmp#strong" href="xhtml-inlphras-1_xsd.html#strong" coords="486,288,548,313" />
+                                 <area alt="xhtml-inlphras-1_xsd.tmp#dfn" href="xhtml-inlphras-1_xsd.html#dfn" coords="486,323,537,348" />
+                                 <area alt="xhtml-inlphras-1_xsd.tmp#code" href="xhtml-inlphras-1_xsd.html#code" coords="486,358,541,383" />
+                                 <area alt="xhtml-inlphras-1_xsd.tmp#samp" href="xhtml-inlphras-1_xsd.html#samp" coords="486,393,543,418" />
+                                 <area alt="xhtml-inlphras-1_xsd.tmp#kbd" href="xhtml-inlphras-1_xsd.html#kbd" coords="486,428,537,453" />
+                                 <area alt="xhtml-inlphras-1_xsd.tmp#var" href="xhtml-inlphras-1_xsd.html#var" coords="486,463,537,488" />
+                                 <area alt="xhtml-inlphras-1_xsd.tmp#cite" href="xhtml-inlphras-1_xsd.html#cite" coords="486,498,537,523" />
+                                 <area alt="xhtml-inlphras-1_xsd.tmp#abbr" href="xhtml-inlphras-1_xsd.html#abbr" coords="486,533,539,558" />
+                                 <area alt="xhtml-inlphras-1_xsd.tmp#acronym" href="xhtml-inlphras-1_xsd.html#acronym" coords="486,568,559,593" />
+                                 <area alt="xhtml-inlphras-1_xsd.tmp#q" href="xhtml-inlphras-1_xsd.html#q" coords="486,603,537,628" />
+                                 <area alt="ddi-xhtml11-model-1_xsd.tmp#InlPhras.class" href="ddi-xhtml11-model-1_xsd.html#InlPhras.class" coords="404,212,526,238" />
+                                 <area alt="xhtml-inlpres-1_xsd.tmp#tt" href="xhtml-inlpres-1_xsd.html#tt" coords="486,689,537,714" />
+                                 <area alt="xhtml-inlpres-1_xsd.tmp#i" href="xhtml-inlpres-1_xsd.html#i" coords="486,724,537,749" />
+                                 <area alt="xhtml-inlpres-1_xsd.tmp#b" href="xhtml-inlpres-1_xsd.html#b" coords="486,759,537,784" />
+                                 <area alt="xhtml-inlpres-1_xsd.tmp#big" href="xhtml-inlpres-1_xsd.html#big" coords="486,794,537,819" />
+                                 <area alt="xhtml-inlpres-1_xsd.tmp#small" href="xhtml-inlpres-1_xsd.html#small" coords="486,829,541,854" />
+                                 <area alt="xhtml-inlpres-1_xsd.tmp#sub" href="xhtml-inlpres-1_xsd.html#sub" coords="486,864,537,889" />
+                                 <area alt="xhtml-inlpres-1_xsd.tmp#sup" href="xhtml-inlpres-1_xsd.html#sup" coords="486,899,537,924" />
+                                 <area alt="ddi-xhtml11-model-1_xsd.tmp#InlPres.class" href="ddi-xhtml11-model-1_xsd.html#InlPres.class" coords="404,648,520,674" />
+                                 <area alt="xhtml-bdo-1_xsd.tmp#bdo" href="xhtml-bdo-1_xsd.html#bdo" coords="486,989,537,1014" />
+                                 <area alt="ddi-xhtml11-model-1_xsd.tmp#I18n.class" href="ddi-xhtml11-model-1_xsd.html#I18n.class" coords="404,944,508,970" />
+                                 <area alt="xhtml-hypertext-1_xsd.tmp#a" href="xhtml-hypertext-1_xsd.html#a" coords="486,1082,537,1107" />
+                                 <area alt="ddi-xhtml11-model-1_xsd.tmp#Anchor.class" href="ddi-xhtml11-model-1_xsd.html#Anchor.class" coords="404,1037,524,1063" />
+                                 <area alt="ddi-xhtml11-model-1_xsd.tmp#Inline.class" href="ddi-xhtml11-model-1_xsd.html#Inline.class" coords="319,47,427,73" />
+                                 <area alt="ddi-xhtml11-model-1_xsd.tmp#Inline.mix" href="ddi-xhtml11-model-1_xsd.html#Inline.mix" coords="234,3,332,29" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Used by</b></div>
+                           <div class="floatRight"><input id="button_usedBy_bdo.content" type="image" src="img/btM.gif" value="-" onclick="switchState('usedBy_bdo.content');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="usedBy_bdo.content" style="display:block">
+                              <table class="usedByTable">
+                                 <tr>
+                                    <td class="firstColumn">Complex Type </td>
+                                    <td><b><a href="xhtml-bdo-1_xsd.html#bdo.type" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-bdo-1.xsd')">bdo.type</a></b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Model</b><div class="floatRight"><input id="button_model_bdo.content" type="image" src="img/btM.gif" value="-" onclick="switchState('model_bdo.content');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="model_bdo.content" style="display:block">(<b><a href="xhtml-inlstruct-1_xsd.html#br" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlstruct-1.xsd')">br</a></b> | <b><a href="xhtml-inlstruct-1_xsd.html#span" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlstruct-1.xsd')">span</a></b> | <b><a href="xhtml-inlphras-1_xsd.html#em" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlphras-1.xsd')">em</a></b> | <b><a href="xhtml-inlphras-1_xsd.html#strong" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlphras-1.xsd')">strong</a></b> | <b><a href="xhtml-inlphras-1_xsd.html#dfn" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlphras-1.xsd')">dfn</a></b> | <b><a href="xhtml-inlphras-1_xsd.html#code" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlphras-1.xsd')">code</a></b> | <b><a href="xhtml-inlphras-1_xsd.html#samp" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlphras-1.xsd')">samp</a></b> | <b><a href="xhtml-inlphras-1_xsd.html#kbd" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlphras-1.xsd')">kbd</a></b> | <b><a href="xhtml-inlphras-1_xsd.html#var" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlphras-1.xsd')">var</a></b> | <b><a href="xhtml-inlphras-1_xsd.html#cite" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlphras-1.xsd')">cite</a></b> | <b><a href="xhtml-inlphras-1_xsd.html#abbr" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlphras-1.xsd')">abbr</a></b> | <b><a href="xhtml-inlphras-1_xsd.html#acronym" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlphras-1.xsd')">acronym</a></b> | <b><a href="xhtml-inlphras-1_xsd.html#q" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlphras-1.xsd')">q</a></b> | <b><a href="xhtml-inlpres-1_xsd.html#tt" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlpres-1.xsd')">tt</a></b> | <b><a href="xhtml-inlpres-1_xsd.html#i" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlpres-1.xsd')">i</a></b> | <b><a href="xhtml-inlpres-1_xsd.html#b" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlpres-1.xsd')">b</a></b> | <b><a href="xhtml-inlpres-1_xsd.html#big" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlpres-1.xsd')">big</a></b> | <b><a href="xhtml-inlpres-1_xsd.html#small" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlpres-1.xsd')">small</a></b> | <b><a href="xhtml-inlpres-1_xsd.html#sub" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlpres-1.xsd')">sub</a></b> | <b><a href="xhtml-inlpres-1_xsd.html#sup" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlpres-1.xsd')">sup</a></b> | (<b><a href="xhtml-bdo-1_xsd.html#bdo" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-bdo-1.xsd')">bdo</a></b>) | (<b><a href="xhtml-hypertext-1_xsd.html#a" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-hypertext-1.xsd')">a</a></b>))
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Children</b></td>
+                        <td><b><a href="xhtml-hypertext-1_xsd.html#a" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-hypertext-1.xsd')">a</a></b>, <b><a href="xhtml-inlphras-1_xsd.html#abbr" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlphras-1.xsd')">abbr</a></b>, <b><a href="xhtml-inlphras-1_xsd.html#acronym" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlphras-1.xsd')">acronym</a></b>, <b><a href="xhtml-inlpres-1_xsd.html#b" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlpres-1.xsd')">b</a></b>, <b><a href="xhtml-bdo-1_xsd.html#bdo" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-bdo-1.xsd')">bdo</a></b>, <b><a href="xhtml-inlpres-1_xsd.html#big" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlpres-1.xsd')">big</a></b>, <b><a href="xhtml-inlstruct-1_xsd.html#br" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlstruct-1.xsd')">br</a></b>, <b><a href="xhtml-inlphras-1_xsd.html#cite" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlphras-1.xsd')">cite</a></b>, <b><a href="xhtml-inlphras-1_xsd.html#code" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlphras-1.xsd')">code</a></b>, <b><a href="xhtml-inlphras-1_xsd.html#dfn" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlphras-1.xsd')">dfn</a></b>, <b><a href="xhtml-inlphras-1_xsd.html#em" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlphras-1.xsd')">em</a></b>, <b><a href="xhtml-inlpres-1_xsd.html#i" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlpres-1.xsd')">i</a></b>, <b><a href="xhtml-inlphras-1_xsd.html#kbd" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlphras-1.xsd')">kbd</a></b>, <b><a href="xhtml-inlphras-1_xsd.html#q" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlphras-1.xsd')">q</a></b>, <b><a href="xhtml-inlphras-1_xsd.html#samp" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlphras-1.xsd')">samp</a></b>, <b><a href="xhtml-inlpres-1_xsd.html#small" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlpres-1.xsd')">small</a></b>, <b><a href="xhtml-inlstruct-1_xsd.html#span" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlstruct-1.xsd')">span</a></b>, <b><a href="xhtml-inlphras-1_xsd.html#strong" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlphras-1.xsd')">strong</a></b>, <b><a href="xhtml-inlpres-1_xsd.html#sub" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlpres-1.xsd')">sub</a></b>, <b><a href="xhtml-inlpres-1_xsd.html#sup" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlpres-1.xsd')">sup</a></b>, <b><a href="xhtml-inlpres-1_xsd.html#tt" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlpres-1.xsd')">tt</a></b>, <b><a href="xhtml-inlphras-1_xsd.html#var" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-inlphras-1.xsd')">var</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_bdo.content" type="image" src="img/btM.gif" value="-" onclick="switchState('source_bdo.content');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_bdo.content" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;xs:group</span><span class="tAN"> name=</span><span class="tAV">"bdo.content"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xs:sequence</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xs:group</span><span class="tAN"> ref=</span><span class="tAV">"Inline.mix"</span><span class="tAN"> minOccurs=</span><span class="tAV">"0"</span><span class="tAN"> maxOccurs=</span><span class="tAV">"unbounded"</span><span class="tEl">/&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xs:sequence&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xs:group&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="dir.attrib"></a><div class="componentTitle">Attribute Group <span class="qname">dir.attrib</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://www.w3.org/1999/xhtml</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_dir.attrib" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_dir.attrib');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_dir.attrib" style="display:block"><img alt="Diagram" border="0" src="img/xhtml-bdo-1_xsd_Attribute_Group_dir_attrib.jpeg" usemap="#xhtml-bdo-1_xsd_Attribute_Group_dir_attrib" /><map name="xhtml-bdo-1_xsd_Attribute_Group_dir_attrib" id="xhtml-bdo-1_xsd_Attribute_Group_dir_attrib">
+                                 <area alt="xhtml-bdo-1_xsd.tmp#dir.attrib_dir" href="xhtml-bdo-1_xsd.html#dir.attrib_dir" coords="122,1,192,26" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Used by</b></div>
+                           <div class="floatRight"><input id="button_usedBy_dir.attrib" type="image" src="img/btM.gif" value="-" onclick="switchState('usedBy_dir.attrib');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="usedBy_dir.attrib" style="display:block">
+                              <table class="usedByTable">
+                                 <tr>
+                                    <td class="firstColumn">Attribute Group </td>
+                                    <td><b><a href="ddi-xhtml11-model-1_xsd.html#I18n.extra.attrib" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for ddi-xhtml11-model-1.xsd')">I18n.extra.attrib</a></b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_dir.attrib" type="image" src="img/btM.gif" value="-" onclick="switchState('attributes_dir.attrib');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_dir.attrib" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th width="10%">Type</th>
+                                       <th width="5%">Use</th>
+                                       <th></th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="xhtml-bdo-1_xsd.html#dir.attrib_dir" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for xhtml-bdo-1.xsd')">dir</a></b></td>
+                                    <td>restriction of <b>xs:NMTOKEN</b></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_dir.attrib" type="image" src="img/btM.gif" value="-" onclick="switchState('source_dir.attrib');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_dir.attrib" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;xs:attributeGroup</span><span class="tAN"> name=</span><span class="tAV">"dir.attrib"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xs:attribute</span><span class="tAN"> name=</span><span class="tAV">"dir"</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xs:simpleType</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;xs:restriction</span><span class="tAN"> base=</span><span class="tAV">"xs:NMTOKEN"</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xs:enumeration</span><span class="tAN"> value=</span><span class="tAV">"ltr"</span><span class="tEl">/&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xs:enumeration</span><span class="tAN"> value=</span><span class="tAV">"rtl"</span><span class="tEl">/&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/xs:restriction&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/xs:simpleType&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xs:attribute&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xs:attributeGroup&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="bdo.attlist"></a><div class="componentTitle">Attribute Group <span class="qname">bdo.attlist</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://www.w3.org/1999/xhtml</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_bdo.attlist" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_bdo.attlist');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_bdo.attlist" style="display:block"><img alt="Diagram" border="0" src="img/xhtml-bdo-1_xsd_Attribute_Group_bdo_attlist.jpeg" usemap="#xhtml-bdo-1_xsd_Attribute_Group_bdo_attlist" /><map name="xhtml-bdo-1_xsd_Attribute_Group_bdo_attlist" id="xhtml-bdo-1_xsd_Attribute_Group_bdo_attlist">
+                                 <area alt="xml_xsd.tmp#lang" href="xml_xsd.html#lang" coords="129,0,218,25" />
+                                 <area alt="xhtml-attribs-1_xsd.tmp#id" href="xhtml-attribs-1_xsd.html#id" coords="146,127,221,153" />
+                                 <area alt="xhtml-attribs-1_xsd.tmp#class" href="xhtml-attribs-1_xsd.html#class" coords="146,171,227,197" />
+                                 <area alt="xhtml-attribs-1_xsd.tmp#title" href="xhtml-attribs-1_xsd.html#title" coords="146,215,221,241" />
+                                 <area alt="ddi-xhtml11-model-1_xsd.tmp#Core.extra.attrib" href="ddi-xhtml11-model-1_xsd.html#Core.extra.attrib" coords="146,259,268,285" />
+                                 <area alt="xhtml-attribs-1_xsd.tmp#Core.attrib" href="xhtml-attribs-1_xsd.html#Core.attrib" coords="132,83,237,109" />
+                                 <area alt="xhtml-bdo-1_xsd.tmp#bdo.attlist_dir" href="xhtml-bdo-1_xsd.html#bdo.attlist_dir" coords="129,338,199,363" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Used by</b></div>
+                           <div class="floatRight"><input id="button_usedBy_bdo.attlist" type="image" src="img/btM.gif" value="-" onclick="switchState('usedBy_bdo.attlist');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="usedBy_bdo.attlist" style="display:block">
+                              <table class="usedByTable">
+                                 <tr>
+                                    <td class="firstColumn">Complex Type </td>
+                                    <td><b><a href="xhtml-bdo-1_xsd.html#bdo.type" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-bdo-1.xsd')">bdo.type</a></b></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_bdo.attlist" type="image" src="img/btM.gif" value="-" onclick="switchState('attributes_bdo.attlist');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_bdo.attlist" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th width="10%">Type</th>
+                                       <th width="5%">Use</th>
+                                       <th>Annotation</th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="xhtml-attribs-1_xsd.html#class_class" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for xhtml-attribs-1.xsd')">class</a></b></td>
+                                    <td><b>xs:NMTOKENS</b></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="xhtml-bdo-1_xsd.html#bdo.attlist_dir" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for xhtml-bdo-1.xsd')">dir</a></b></td>
+                                    <td>restriction of <b>xs:NMTOKEN</b></td>
+                                    <td>required</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="xhtml-attribs-1_xsd.html#id_id" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for xhtml-attribs-1.xsd')">id</a></b></td>
+                                    <td><b>xs:ID</b></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="xhtml-attribs-1_xsd.html#title_title" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for xhtml-attribs-1.xsd')">title</a></b></td>
+                                    <td><b>xs:string</b></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="xml_xsd.html#lang" target="mainFrame" title="http://www.w3.org/XML/1998/namespace" onclick="updatePageTitle('Schema documentation for xml.xsd')">xml:lang</a></b></td>
+                                    <td><b>xs:language</b></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation">
+                                          <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                             <tr>
+                                                <td width="100%"><pre><span class="tT">In due course, we should install the relevant ISO 2- and 3-letter</span><span class="tI">
+</span><span class="tT">codes as the enumerated possible values . . .</span></pre></td>
+                                             </tr>
+                                          </table>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_bdo.attlist" type="image" src="img/btM.gif" value="-" onclick="switchState('source_bdo.attlist');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_bdo.attlist" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;xs:attributeGroup</span><span class="tAN"> name=</span><span class="tAV">"bdo.attlist"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xs:attribute</span><span class="tAN"> ref=</span><span class="tAV">"xml:lang"</span><span class="tEl">/&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xs:attributeGroup</span><span class="tAN"> ref=</span><span class="tAV">"Core.attrib"</span><span class="tEl">/&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xs:attribute</span><span class="tAN"> name=</span><span class="tAV">"dir"</span><span class="tAN"> use=</span><span class="tAV">"required"</span><span class="tEl">&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;xs:simpleType</span><span class="tEl">&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;xs:restriction</span><span class="tAN"> base=</span><span class="tAV">"xs:NMTOKEN"</span><span class="tEl">&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xs:enumeration</span><span class="tAN"> value=</span><span class="tAV">"ltr"</span><span class="tEl">/&gt;</span><span class="tI">
+        </span><span class="tEl">&lt;xs:enumeration</span><span class="tAN"> value=</span><span class="tAV">"rtl"</span><span class="tEl">/&gt;</span><span class="tI">
+      </span><span class="tEl">&lt;/xs:restriction&gt;</span><span class="tI">
+    </span><span class="tEl">&lt;/xs:simpleType&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;/xs:attribute&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xs:attributeGroup&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="Global.bdo.attrib"></a><div class="componentTitle">Attribute Group <span class="qname">Global.bdo.attrib</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn"><b>Namespace</b></td>
+                        <td>http://www.w3.org/1999/xhtml</td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_Global.bdo.attrib" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_Global.bdo.attrib');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_Global.bdo.attrib" style="display:block"><img alt="Diagram" border="0" src="img/xhtml-bdo-1_xsd_Attribute_Group_Global_bdo_attrib.jpeg" usemap="#xhtml-bdo-1_xsd_Attribute_Group_Global_bdo_attrib" /><map name="xhtml-bdo-1_xsd_Attribute_Group_Global_bdo_attrib" id="xhtml-bdo-1_xsd_Attribute_Group_Global_bdo_attrib">
+                                 <area alt="xhtml-bdo-1_xsd.tmp#dir" href="xhtml-bdo-1_xsd.html#dir" coords="161,1,231,26" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_Global.bdo.attrib" type="image" src="img/btM.gif" value="-" onclick="switchState('attributes_Global.bdo.attrib');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_Global.bdo.attrib" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th width="10%">Type</th>
+                                       <th width="5%">Use</th>
+                                       <th></th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="xhtml-bdo-1_xsd.html#dir" target="mainFrame" title="http://www.w3.org/1999/xhtml" onclick="updatePageTitle('Schema documentation for xhtml-bdo-1.xsd')">dir</a></b></td>
+                                    <td>restriction of <b>xs:NMTOKEN</b></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Source</b></div>
+                           <div class="floatRight"><input id="button_source_Global.bdo.attrib" type="image" src="img/btM.gif" value="-" onclick="switchState('source_Global.bdo.attrib');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="source_Global.bdo.attrib" style="display:block">
+                              <table style="table-layout:fixed;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;_white-space:pre;" class="preWrapContainer">
+                                 <tr>
+                                    <td width="100%"><pre><span class="tEl">&lt;xs:attributeGroup</span><span class="tAN"> name=</span><span class="tAV">"Global.bdo.attrib"</span><span class="tEl">&gt;</span><span class="tI">
+  </span><span class="tEl">&lt;xs:attribute</span><span class="tAN"> ref=</span><span class="tAV">"dir"</span><span class="tEl">/&gt;</span><span class="tI">
+</span><span class="tEl">&lt;/xs:attributeGroup&gt;</span></pre></td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table>
+      <div class="footer">
+         <hr />
+         <div align="center">XML Schema documentation generated by <a href="http://www.oxygenxml.com" target="_parent"><span class="oXygenLogo"><span class="redX">&lt;</span>o<span class="redX">X</span>ygen<span class="redX">/&gt;</span></span></a><sup>®</sup> XML Editor.
+         </div>
+      </div><script type="text/javascript">
+         <!--
+                     // The namespace is the selected option in the TOC combo.
+                    
+                     // Floats the toolbar.
+                     var globalControls = getElementObject("global_controls"); 
+                     
+                     if(globalControls != null){
+	                     var browser=navigator.appName;
+						 var version = parseFloat(navigator.appVersion.split('MSIE')[1]);
+						 
+						 var IE6 = false;
+						 if ((browser=="Microsoft Internet Explorer") && (version < 7)){
+						 	IE6 = true;
+						 }
+	
+	                     //alert (IE6 + " |V| " + version);
+	                     
+	                     if(IE6){
+	                     	// On IE 6 the 'fixed' property is not supported. We must use javascript. 
+	                         globalControls.style.position='absolute';                         
+	                         // The global controls will do not exist in the TOC frame, when chunking.
+	                         findAndFloat("global_controls", 225, 30);    
+	                     } else {
+	                      	  globalControls.style.position='fixed';                     	
+	                     }
+	                     
+	                     globalControls.style.right='0';                       
+                     }
+                //--></script></body>
+</html>
