@@ -11,11 +11,11 @@ Confidentiality and cloaking of selective information in a context-aware manner 
 
 Users can link directly to the schema by adding the following attribute to the `<codeBook>` definition in their DDI XML:
 
-xsi:schemaLocation="ddi:codebook:2_5 http://www.ncrn.cornell.edu/docs/ddi/2.5.NCRN/schemas/codebook.xsd"
+    xsi:schemaLocation="ddi:codebook:2_5 http://www.ncrn.cornell.edu/docs/ddi/2.5.NCRN/schemas/codebook.xsd"
 
 or if using the Github version
 
-xsi:schemaLocation="ddi:codebook:2_5 https://raw.githubusercontent.com/ncrncornell/ddi-doc/master/2.5.NCRN/schemas/codebook.xsd"
+    xsi:schemaLocation="ddi:codebook:2_5 https://raw.githubusercontent.com/ncrncornell/ddi-doc/master/2.5.NCRN/schemas/codebook.xsd"
 
 # Provenance
 
@@ -24,11 +24,11 @@ Many of the data underlying social science research are embedded in complex prov
 ## Usage
 Users can link directly to the schema by adding the following attribute to the `<codeBook>` definition in their DDI XML:
 
-xsi:schemaLocation="ddi:codebook:2_5 http://www.ncrn.cornell.edu/docs/ddi/2.5.NCRN.P/schemas/codebook.xsd"
+    xsi:schemaLocation="ddi:codebook:2_5 http://www.ncrn.cornell.edu/docs/ddi/2.5.NCRN.P/schemas/codebook.xsd"
 
 or if using the Github version
 
-xsi:schemaLocation="ddi:codebook:2_5 https://raw.githubusercontent.com/ncrncornell/ddi-doc/master/2.5.NCRN.P/schemas/codebook.xsd"
+    xsi:schemaLocation="ddi:codebook:2_5 https://raw.githubusercontent.com/ncrncornell/ddi-doc/master/2.5.NCRN.P/schemas/codebook.xsd"
 
 ## Authors and Contributors
 These Github pages are maintained by Lars Vilhuber @larsvilhuber, Ben Perry @bap63. For additional contributors to NCRN Cornell, see the [People page](https://www.ncrn.cornell.edu/people/) at http://www.ncrn.cornell.edu
