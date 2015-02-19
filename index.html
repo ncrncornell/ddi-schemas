@@ -1,0 +1,87 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Proposed DDI-C enhancements by ncrncornell</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Proposed DDI-C enhancements</h1>
+        <p>DDI metadata schema as proposed by the NCRN Cornell project.</p>
+
+        <p class="view"><a href="https://github.com/ncrncornell/ddi-doc">View the Project on GitHub <small>ncrncornell/ddi-doc</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/ncrncornell/ddi-doc/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/ncrncornell/ddi-doc/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/ncrncornell/ddi-doc">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <p>The primary location for documentation of these enhancements is at <a href="https://www.ncrn.cornell.edu/projects/#Metadata_Standards_and_Tools">https://www.ncrn.cornell.edu/projects/#Metadata_Standards_and_Tools</a>. Users might also be interested in our other <a href="https://github.com/ncrncornell/">Github repositories</a>.</p>
+
+<h1>
+<a id="confidentiality-and-cloaking-in-metadata" class="anchor" href="#confidentiality-and-cloaking-in-metadata" aria-hidden="true"><span class="octicon octicon-link"></span></a>Confidentiality and cloaking in metadata</h1>
+
+<p>Confidentiality and cloaking of selective information in a context-aware manner is a key requirement of any repository of quantitative social science data. A substantial portion of the data commonly used for quantitative social science are confidential because they associate the identities of the subjects of study (e.g., people, corporations, etc.) with private information such as income level, health history, and the like. A particularly interesting twist in social science is the existence of disclosure limitations not only on the data, but also on the metadata. These may include statutory disclosure restrictions on statistical features of the underlying data, such as extreme values, and even prohibitions on the disclosure of variable names themselves. We have accommodated this requirement by extending existing methods in DDI-C to accomodate more fine-grained  disclosure control attributes in the DDI metadata format.</p>
+
+<h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<p>Users can link directly to the schema by adding the following attribute to the <code>&lt;codeBook&gt;</code> definition in their DDI XML:</p>
+
+<pre><code>xsi:schemaLocation="ddi:codebook:2_5 http://www.ncrn.cornell.edu/docs/ddi/2.5.NCRN/schemas/codebook.xsd"
+</code></pre>
+
+<p>or if using the Github version</p>
+
+<pre><code>xsi:schemaLocation="ddi:codebook:2_5 https://raw.githubusercontent.com/ncrncornell/ddi-doc/master/2.5.NCRN/schemas/codebook.xsd"
+</code></pre>
+
+<h1>
+<a id="provenance" class="anchor" href="#provenance" aria-hidden="true"><span class="octicon octicon-link"></span></a>Provenance</h1>
+
+<p>Many of the data underlying social science research are embedded in complex provenance chains composed of inter-related private and publicly accessible data and metadata, multithreaded relationships among these data and metadata, and partially-ordered version sequence., making it difficult to understand and trace the origins of data that are the basis of a particular study. This presents barriers to the essential scholarly tasks of testing research results for validity and reproducibility, creating a substantial risk of breach of the scientific integrity of the research process itself. It also presents an often insurmountable barrier to data reuse, which is fundamental to the incremental building of research results in a scholarly field. Our work in this area has focused on the use of the <a href="http://www.w3.org/TR/prov-primer/">W3C PROV model</a> to develop an extensible, semantically-based, and practical solution for encoding provenance within XML-encoded DDI-C.</p>
+
+<h2>
+<a id="usage-1" class="anchor" href="#usage-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<p>Users can link directly to the schema by adding the following attribute to the <code>&lt;codeBook&gt;</code> definition in their DDI XML:</p>
+
+<pre><code>xsi:schemaLocation="ddi:codebook:2_5 http://www.ncrn.cornell.edu/docs/ddi/2.5.NCRN.P/schemas/codebook.xsd"
+</code></pre>
+
+<p>or if using the Github version</p>
+
+<pre><code>xsi:schemaLocation="ddi:codebook:2_5 https://raw.githubusercontent.com/ncrncornell/ddi-doc/master/2.5.NCRN.P/schemas/codebook.xsd"
+</code></pre>
+
+<h2>
+<a id="authors-and-contributors" class="anchor" href="#authors-and-contributors" aria-hidden="true"><span class="octicon octicon-link"></span></a>Authors and Contributors</h2>
+
+<p>These Github pages are maintained by Lars Vilhuber <a href="https://github.com/larsvilhuber" class="user-mention">@larsvilhuber</a>, Ben Perry <a href="https://github.com/bap63" class="user-mention">@bap63</a>. For additional contributors to NCRN Cornell, see the <a href="https://www.ncrn.cornell.edu/people/">People page</a> at <a href="http://www.ncrn.cornell.edu">http://www.ncrn.cornell.edu</a></p>
+
+<h2>
+<a id="support-or-contact" class="anchor" href="#support-or-contact" aria-hidden="true"><span class="octicon octicon-link"></span></a>Support or Contact</h2>
+
+<p>For more information, see <a href="http://www.ncrn.cornell.edu/">http://www.ncrn.cornell.edu/</a>.</p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/ncrncornell">ncrncornell</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
