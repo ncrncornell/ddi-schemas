@@ -1354,6 +1354,7 @@ with DDI 2.5 XML Schema. If not, see <http://www.gnu.org/licenses/>.
             </xs:attribute>
             <xs:attribute name="catgry" type="xs:IDREFS" use="optional"/>
             <xs:attribute name="level" type="xs:IDREF" use="optional"/>
+            <xs:attribute name="access" type="xs:IDREF"/>
          </xs:extension>
       </xs:complexContent>
    </xs:complexType>
@@ -6840,6 +6841,7 @@ with DDI 2.5 XML Schema. If not, see <http://www.gnu.org/licenses/>.
                </xs:simpleType>
             </xs:attribute>
             <xs:attribute name="otherType" type="xs:NMTOKEN" use="optional"/>
+            <xs:attribute name="access" type="xs:IDREFS"/>
          </xs:extension>
       </xs:complexContent>
    </xs:complexType>
